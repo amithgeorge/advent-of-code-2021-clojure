@@ -37,6 +37,7 @@
        count))
 
 (defn num-increasing-elevations-group-of-3
+  "This is solving Part 2 of the problem"
   [elevations]
   (->> elevations
        (partition 3 1)
@@ -55,7 +56,8 @@
     (num-increasing-elevation-2 challenge-input)))
 
 (assert
- (= 5 (num-increasing-elevations-group-of-3 (input-str->seq input-1-str))))
+ (= 1600
+    (num-increasing-elevations-group-of-3 challenge-input)))
 
 (comment
   (def elevations (input-str->seq input-1-str))
