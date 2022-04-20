@@ -54,11 +54,6 @@ forward 2")
 (process-commands challenge-input initial-state)
 
 (comment
-  (let [input-1 "forward 5"
-        command-1 (parse-command-input "up 4")]
-    command-1)
-
-
   (update initial-state :distance (fnil + 0) 3)
 
   (parse-command-input "up 4")
