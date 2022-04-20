@@ -2,7 +2,7 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as str]))
 
-(def initial-state {:distance 0 :depth 0})
+(def initial-state {:distance 0 :depth 0 :aim 0})
 
 (defn parse-command-input
   [input]
@@ -19,9 +19,11 @@
 (defn execute-command
   [{:keys [command value]} state]
   (case command
-    :forward (update state :distance (fnil + 0) value)
-    :down (update state :depth (fnil + 0) value)
-    :up (update state :depth (fnil - 0) value)
+    :forward (-> state
+                 (update :distance (fnil + 0) value)
+                 (update :depth (fnil + 0) (* (:aim state) value)))
+    :down (update state :aim (fnil + 0) value)
+    :up (update state :aim (fnil - 0) value)
     (ex-info "Unknown command" {:command command :value value})))
 
 (def sample-input-str "forward 5
