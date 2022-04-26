@@ -91,6 +91,54 @@
      :epsilon epsilon
      :power-consumption (* gamma epsilon)}))
 
+(defn most-common-bit
+  [bit-position binary-nums]
+  (let [freqs (frequencies (map #(nth %1 bit-position) binary-nums))]
+    (if (< (get freqs 1 0)
+           (get freqs 0 0))
+      0
+      1)))
+
+(defn least-common-bit
+  [bit-position binary-nums]
+  (let [freqs (frequencies (map #(nth %1 bit-position) binary-nums))]
+    (if (<= (get freqs 0 0)
+            (get freqs 1 0))
+      0
+      1)))
+
+(defn oxygen-generator-rating
+  ([binary-nums]
+   (loop [bit-position 0
+          binary-nums binary-nums]
+     (cond
+       (= 0 (count binary-nums)) :invalid-input-empty
+       (= 1 (count binary-nums)) (first binary-nums)
+       (<= (count (first binary-nums)) bit-position) :not-found
+       :else (let [bit-criteria (most-common-bit bit-position binary-nums)]
+               (recur (inc bit-position)
+                      (filter #(= bit-criteria (nth %1 bit-position))
+                              binary-nums)))))))
+
+(defn co2-scrubber-rating
+  ([binary-nums]
+   (loop [bit-position 0
+          binary-nums binary-nums]
+     (cond
+       (= 0 (count binary-nums)) :invalid-input-empty
+       (= 1 (count binary-nums)) (first binary-nums)
+       (<= (count (first binary-nums)) bit-position) :not-found
+       :else (let [bit-criteria (least-common-bit bit-position binary-nums)]
+               (recur (inc bit-position)
+                      (filter #(= bit-criteria (nth %1 bit-position))
+                              binary-nums)))))))
+
 (comment
   (power-consumption (input-str->binary-nums sample-input-str))
-  (power-consumption challenge-input))
+  (power-consumption challenge-input)
+
+
+  (most-common-bit 0 [[1 0 0][0 1 1]])
+  (oxygen-generator-rating [[0 1 0][1 1 1][0 1 1]])
+  (oxygen-generator-rating (input-str->binary-nums sample-input-str))
+  (co2-scrubber-rating (input-str->binary-nums sample-input-str)))
