@@ -133,6 +133,11 @@
                       (filter #(= bit-criteria (nth %1 bit-position))
                               binary-nums)))))))
 
+(defn life-support-rating
+  [binary-nums]
+  (* (binary-vec->decimal (oxygen-generator-rating binary-nums))
+     1))
+
 (comment
   (power-consumption (input-str->binary-nums sample-input-str))
   (power-consumption challenge-input)
@@ -141,4 +146,5 @@
   (most-common-bit 0 [[1 0 0][0 1 1]])
   (oxygen-generator-rating [[0 1 0][1 1 1][0 1 1]])
   (oxygen-generator-rating (input-str->binary-nums sample-input-str))
-  (co2-scrubber-rating (input-str->binary-nums sample-input-str)))
+  (co2-scrubber-rating (input-str->binary-nums sample-input-str))
+  (life-support-rating (input-str->binary-nums sample-input-str)))
