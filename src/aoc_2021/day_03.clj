@@ -36,14 +36,14 @@
        (mapv binary-str->vec)))
 
 (defn digit-frequencies
-  "Given input like 
+  "Given input like
     [[1 0 1]
       [1 0 0]]
-   The output will be 
+   The output will be
      [{1 2} {0 2} {0 1, 1 1}]
    Each element of the output is a map with maximum two keys, 0 and 1.
-    The value of each key is the frequency of that digit in that bit-location 
-    in all the binary numbers. In the most-significant bit-location, 
+    The value of each key is the frequency of that digit in that bit-location
+    in all the binary numbers. In the most-significant bit-location,
     the digit 1 appears twice, hence the output contains the map {1 2}"
   [binary-numbers]
   (reduce
@@ -56,7 +56,7 @@
    binary-numbers))
 
 (defn higher-frequency-digit
-  "Given a map of digit frequences, returns the digit 
+  "Given a map of digit frequences, returns the digit
   that is more frequent. Eg for input {0 3, 1 4}, return 1"
   [m]
   (if (> (get m 0 0)
@@ -65,7 +65,7 @@
     1))
 
 (defn lower-frequency-digit
-  "Given a map of digit frequences, returns the digit 
+  "Given a map of digit frequences, returns the digit
   that is less frequent. Eg for input {0 3, 1 4}, return 0"
   [m]
   (if (< (get m 0 0)
@@ -94,4 +94,3 @@
 (comment
   (power-consumption (input-str->binary-nums sample-input-str))
   (power-consumption challenge-input))
-
