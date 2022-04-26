@@ -136,15 +136,22 @@
 (defn life-support-rating
   [binary-nums]
   (* (binary-vec->decimal (oxygen-generator-rating binary-nums))
-     1))
+     (binary-vec->decimal (co2-scrubber-rating binary-nums))))
 
 (comment
   (power-consumption (input-str->binary-nums sample-input-str))
+;; => {:gamma 22, :epsilon 9, :power-consumption 198}
   (power-consumption challenge-input)
+;; => {:gamma 2502, :epsilon 1593, :power-consumption 3985686}
+
+  (life-support-rating (input-str->binary-nums sample-input-str))
+;; => 230
+  (life-support-rating challenge-input)
+;; => 2555739
 
 
   (most-common-bit 0 [[1 0 0][0 1 1]])
   (oxygen-generator-rating [[0 1 0][1 1 1][0 1 1]])
   (oxygen-generator-rating (input-str->binary-nums sample-input-str))
   (co2-scrubber-rating (input-str->binary-nums sample-input-str))
-  (life-support-rating (input-str->binary-nums sample-input-str)))
+  )
